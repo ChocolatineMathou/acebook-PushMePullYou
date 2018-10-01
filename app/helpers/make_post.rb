@@ -1,6 +1,6 @@
 module MakePostHelper
   def make_post
-    visit '/posts/new'
+    visit '/posts'
     fill_in 'post_message', with: 'test post'
     click_button 'Submit'
   end
