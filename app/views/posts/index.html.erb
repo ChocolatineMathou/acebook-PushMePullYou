@@ -15,6 +15,9 @@
       <% customer = Customer.find(post.customer_id) %>
       <p class="post_by"><mark class="grey">post.by = </mark><%= "#{customer.first_name} #{customer.last_name}"%></p>
       <p class="post_time"><mark class="grey">post.created_at = </mark><%= post.created_at.strftime("%H:%M:%S %m/%d/%Y") %></p>
+      <%= button_to post_path(id: post.id), method: :delete do %>
+        post.delete?
+      <% end %>
     </div>
 
     <% end %>
