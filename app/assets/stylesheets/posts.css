@@ -64,6 +64,13 @@ p.it_block {
   padding-bottom: 0.8em;
 }
 
+a#like_link {
+  margin: inherit;
+  padding-left: 120px;
+  font-size: 14px;
+  font-style: italic
+}
+
 p.post_message {
   margin: inherit;
   padding-left: 6.8em;

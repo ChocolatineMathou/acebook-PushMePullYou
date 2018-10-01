@@ -15,8 +15,14 @@
       <% customer = Customer.find(post.customer_id) %>
       <p class="post_by"><mark class="grey">post.by = </mark><%= "#{customer.first_name} #{customer.last_name}"%></p>
       <p class="post_time"><mark class="grey">post.created_at = </mark><%= post.created_at.strftime("%H:%M:%S %m/%d/%Y") %></p>
-      <%= link_to "Like", post_likes_path(post), method: :post %>
-      <%= post.likes.count %>
+      <!-- <%= link_to "Like", post_likes_path(post), method: :post %> -->
+      <!-- <%= post.likes.count %> -->
+      <%= link_to  post_likes_path(post), method: :post, id: "like_link" do %>
+      <mark class="grey"> 
+        post.like =
+        <%= post.likes.count %>
+        </mark>
+      <% end %>
     </div>
 
     <% end %>

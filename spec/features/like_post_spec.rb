@@ -11,7 +11,7 @@ RSpec.feature 'Like a post', type: :feature do
   before(:each) do
     sign_up('PushMe', 'PullYou', 'test@test.com', '123456')
     make_post
-    click_link 'Like'
+    click_link 'post.like ='
     @post = Post.all[0]
   end
 
@@ -20,7 +20,7 @@ RSpec.feature 'Like a post', type: :feature do
   end
 
   scenario 'User can only like a post once' do
-    click_link 'Like'
+    click_link 'post.like ='
     expect(@post.likes.count).to eq(0)
   end
 
@@ -29,7 +29,7 @@ RSpec.feature 'Like a post', type: :feature do
     click_link 'get :sign_out'
     sign_up('Mal', 'Gil', 'mal.gil@test.com', '123456')
     visit '/posts'
-    click_link 'Like'
+    click_link 'post.like ='
     expect(@post.likes.count).to eq(2)
   end
 end
