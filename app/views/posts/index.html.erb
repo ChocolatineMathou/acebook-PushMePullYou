@@ -13,11 +13,11 @@
     <div class="post_container">
       <p class="post_message"><mark class="grey">post.message =</mark> <%= post.message %></p>
       <% customer = Customer.find(post.customer_id) %>
-      <p class="post_by"><mark class="grey">post.by = </mark><%= "#{customer.first_name} #{customer.last_name}"%></p>
-      <p class="post_time"><mark class="grey">post.created_at = </mark><%= post.created_at.strftime("%H:%M:%S %m/%d/%Y") %></p>
+      <p class="post_by"><mark class="grey"># post.by = <%= "#{customer.first_name} #{customer.last_name}"%></mark></p>
+      <p class="post_time"><mark class="grey"># post.created_at = <%= post.created_at.strftime("%H:%M:%S %m/%d/%Y") %></mark></p>
       <% if post.customer_id == current_customer.id %>
-        <%= button_to post_path(id: post.id), method: :delete do %>
-          post.delete?
+        <%= link_to post_path(id: post.id), method: :delete, id: "post-delete-link" do %>
+          <mark class="grey">post.delete?</mark>
         <% end %>
       <% end %>
     </div>
