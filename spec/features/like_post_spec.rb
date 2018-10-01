@@ -10,7 +10,7 @@ RSpec.feature 'Single view', type: :feature do
   scenario 'User can see a single post' do
     sign_up
     make_post
-    click_button 'like'
+    click_link 'Like'
     @post = Post.all[0]
     expect(@post.likes.count).to eq(1)
   end
