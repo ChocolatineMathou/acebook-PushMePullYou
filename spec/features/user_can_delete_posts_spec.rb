@@ -21,4 +21,8 @@ RSpec.feature "Delete Posts", type: :feature do
     expect(URI.parse(current_url).path).to eq '/posts'
   end
 
+  scenario 'A user can only delete their own posts' do
+    
+  end
+
 end
