@@ -13,6 +13,10 @@ class PostsController < ApplicationController
     @posts = Post.all.reverse
   end
 
+  def show
+    @post = Post.find_by(id: params[:post_id])
+  end
+
   private
 
   def post_params
