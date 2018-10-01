@@ -22,7 +22,16 @@ RSpec.feature "Delete Posts", type: :feature do
   end
 
   scenario 'A user can only delete their own posts' do
-    
+    expect(page).to have_content 'test'
+    visit '/'
+    click_link 'get :sign_out'
+    click_link 'get :sign_up'
+    fill_in 'customer_email', with: 'test2@test.com'
+    fill_in 'customer_password', with: 'test2123'
+    fill_in 'customer_password_confirmation', with: 'test2123'
+    click_button 'Sign up'
+    click_link 'get :posts'
+    expect(page).not_to have_button 'post.delete?'
   end
 
 end
