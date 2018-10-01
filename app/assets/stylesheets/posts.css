@@ -38,8 +38,7 @@ p.it_block {
 ::placeholder {
   color: white;
   font-family: "Courier New";
-  
-
+  font-size: 16px;
 }
 
 #form_submit_button {
@@ -52,10 +51,16 @@ p.it_block {
   font-size: 1em;
   border-right: 1px solid white;
   border-left: 1px solid white;
+  border-radius: 5px;
   margin-left: 15px;
 }
 
+#form_submit_button:hover {
+  background-color: #434753;
+}
+
 .post_container {
+  width: 500px;
   text-align: left;
   font-size: 18px;
   font-weight: bold;
@@ -66,7 +71,7 @@ p.it_block {
 
 a#like_link {
   margin: inherit;
-  padding-left: 120px;
+  margin-left: 120px;
   font-size: 14px;
   font-style: italic
 }
@@ -78,12 +83,22 @@ p.post_message {
 
 p.post_by {
   margin: inherit;
-  padding-left: 6.8em;
+  padding-left: 120px;
+  font-size: 14px;
+  font-style: italic;
 }
 
 p.post_time {
   margin: inherit;
-  padding-left: 6.8em;
+  padding-left: 120px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+a#post-delete-link {
+  margin: inherit;
+  margin-left: 122px;
+  font-size: 14px;
 }
 
 p.end {
