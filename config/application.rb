@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Acebook
   class Application < Rails::Application
+    confit.api_only = true
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
