@@ -8,8 +8,13 @@ class RegistrationsController < Devise::RegistrationsController
       password: params[:password],
       password_confirmation: params[:password_confirmation]})
 
-    sign_in customer
-    render :json => {:success=>true, current_customer: current_customer }
+    if customer.valid?
+      sign_in customer
+      render :json => {:success=>true, current_customer: current_customer }
+    else
+      render :json => {:success=>false, message: "Oooops"}
+    end
+    p customer.valid?
 
   end
 
