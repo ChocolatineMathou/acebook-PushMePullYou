@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Post, type: :model do
 
   before do
-    @customer = Customer.create(email: 'dave@123.com', password: '123')
+    @customer = Customer.create(first_name: 'Dave', last_name: 'Funny', email: 'dave@123.com', password: '123456')
     @post = Post.create(message: 'hello world', customer_id: @customer.id)
   end
 

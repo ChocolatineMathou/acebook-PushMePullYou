@@ -14,15 +14,20 @@
       <p class="post_message"><mark class="grey">post.message =</mark> <%= post.message %></p>
       <% customer = Customer.find(post.customer_id) %>
       <p class="post_by"><mark class="grey"># post.by = <%= "#{customer.first_name} #{customer.last_name}"%></mark></p>
-      <p class="post_time"><mark class="grey"># post.created_at = <%= post.created_at.strftime("%H:%M:%S %m/%d/%Y") %></mark></p>
+      <p class="post_time"><mark class="grey"># post.created_at = <%= post.created_at.strftime("%H:%M:%S %d/%m/%Y") %></mark></p>
+      <%= link_to  post_likes_path(post), method: :post, id: "like_link" do %>
+      <mark class="grey"> 
+        post.like =
+        <%= post.likes.count %>
+      </mark>
+      <% end %>
       <% if post.customer_id == current_customer.id %>
         <%= link_to post_path(id: post.id), method: :delete, id: "post-delete-link" do %>
           <mark class="grey">post.delete?</mark>
         <% end %>
       <% end %>
     </div>
-
-    <% end %>
+  <% end %>
   <p class="end"><mark class="purple">end</p>
 </div>
 <h2 class="end"><mark class="purple">end</mark></h2>
