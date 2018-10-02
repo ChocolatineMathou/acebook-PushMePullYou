@@ -43,6 +43,10 @@ h2 {
 
 }
 
+a:hover {
+  background-color: #434753;
+}
+
 mark.yellow {
   background-color: inherit;
   color: #D5C088;

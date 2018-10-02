@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
 
-
   def create
     @post = Post.create(post_params)
     redirect_to posts_url
@@ -9,6 +8,11 @@ class PostsController < ApplicationController
   def index
     redirect_to pages_home_url if current_customer == nil
     @posts = Post.all.reverse
+  end
+
+  def destroy
+    Post.destroy(params[:id])
+    redirect_to posts_url
   end
 
   private
