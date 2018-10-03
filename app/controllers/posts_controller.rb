@@ -7,20 +7,7 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.all.reverse
-    # p posts
-    posts.map do |post|
-      # p post
-      post.json_format
-      # p post
-      # customer = Customer.find(post.customer_id)
-      # p customer.first_name
-      # p customer.last_name
-      # post.first_name = customer.first_name
-      # post.last_name = customer.last_name
-      # post.send :first_name, customer.first_name
-      # post.send("first_name=", "hello")
-      # p post
-    end
+    posts.map! { |post| post = post.json_format }
     render :json => { posts: posts }
   end
 

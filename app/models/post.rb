@@ -6,11 +6,14 @@ class Post < ApplicationRecord
 
   def json_format
     customer = Customer.find(customer_id)
-    super.merge(test: customer.first_name)
-    # first_name = customer.first_name
-    # last_name = customer.last_name
-    # p first_name
-    # p last_name
-    # p self
+    {
+      id: id,
+      message: message,
+      created_at: created_at,
+      updated_at: updated_at,
+      customer_id: customer_id,
+      first_name: customer.first_name,
+      last_name: customer.last_name
+    }
   end
 end
