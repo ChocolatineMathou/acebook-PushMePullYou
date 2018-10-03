@@ -1,13 +1,27 @@
 class PostsController < ApplicationController
 
   def create
-    @post = Post.create(post_params)
-    redirect_to posts_url
+    post = Post.create(post_params)
+    render :json => { :success=> true, current_customer: current_customer, post: { message: post.message } }
   end
 
   def index
-    redirect_to pages_home_url if current_customer == nil
-    @posts = Post.all.reverse
+    posts = Post.all.reverse
+    # p posts
+    posts.map do |post|
+      # p post
+      post.json_format
+      # p post
+      # customer = Customer.find(post.customer_id)
+      # p customer.first_name
+      # p customer.last_name
+      # post.first_name = customer.first_name
+      # post.last_name = customer.last_name
+      # post.send :first_name, customer.first_name
+      # post.send("first_name=", "hello")
+      # p post
+    end
+    render :json => { posts: posts }
   end
 
   def destroy

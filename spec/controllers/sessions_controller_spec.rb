@@ -12,7 +12,7 @@ RSpec.describe SessionsController, type: :controller do
     end
 
     context "given valid sign in details" do
-      it "responds in json format" do
+      it "returns in json format" do
         post :create, params: {email: "testing@rspec.com", password: "123456"}
         expect(response).to be_successful
         expect(response.content_type).to eq('application/json')

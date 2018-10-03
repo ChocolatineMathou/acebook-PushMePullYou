@@ -2,9 +2,6 @@ require 'rails_helper'
 
 RSpec.describe RegistrationsController, type: :controller do
 
-  #registrations#create
-  # /customers
-
   describe "POST /" do
 
     before do
@@ -12,7 +9,7 @@ RSpec.describe RegistrationsController, type: :controller do
     end
 
     context "with valid params" do
-      it "creates a new customer" do
+      it "returns json data" do
         post :create, params: { first_name: "test", last_name: "rspec", email: "testing@rspec.com", password: "123456", password_confirmation: "123456"}
         expect(response).to be_successful
         expect(response.content_type).to eq('application/json')
@@ -56,5 +53,26 @@ RSpec.describe RegistrationsController, type: :controller do
         expect(subject.current_customer).to eq nil
       end
     end
+
+    # context "email uniqueness" do
+    #   it "does not create a new customer" do
+    #     post :create, params: { first_name: "test", last_name: "rspec", email: "testing@rspec.com", password: "123456", password_confirmation: "123456"}
+    #     post :create, params: { first_name: "testing", last_name: "iloverspec", email: "testing@rspec.com", password: "123456", password_confirmation: "123456"}
+    #     expect(response).to be_successful
+    #     expect(response.content_type).to eq('application/json')
+    #   end
+    #
+    #   it "does not add customer to the table" do
+    #     post :create, params: { first_name: "test", last_name: "rspec", email: "testing@rspec.com", password: "123456", password_confirmation: "123456"}
+    #     expect { post :create, params: { first_name: "testing", last_name: "iloverspec", email: "testing@rspec.com", password: "123456", password_confirmation: "123456"} }.to change { Customer.all.length }.by(0)
+    #   end
+    #
+    #   it "provides unsuccessful indication" do
+    #     post :create, params: { first_name: "test", last_name: "rspec", email: "testing@rspec.com", password: "123456", password_confirmation: "123456"}
+    #     post :create, params: { first_name: "testing", last_name: "iloverspec", email: "testing@rspec.com", password: "123456", password_confirmation: "123456"}
+    #     expect(JSON.parse(response.body)["success"]).to eq false
+    #     expect(JSON.parse(response.body)["message"]).to eq "Email address already used."
+    #   end
+    # end
   end
 end

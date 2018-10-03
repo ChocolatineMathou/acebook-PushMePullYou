@@ -14,7 +14,6 @@ class RegistrationsController < Devise::RegistrationsController
     else
       render :json => {:success=>false, message: "Oooops"}
     end
-    p customer.valid?
 
   end
 
