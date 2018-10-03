@@ -8,12 +8,12 @@ class PostsController < ApplicationController
   def index
     posts = Post.all.reverse
     posts.map! { |post| post = post.json_format }
-    render :json => { posts: posts }
+    render :json => { success: true, current_customer: current_customer, posts: posts }
   end
 
   def destroy
     Post.destroy(params[:id])
-    redirect_to posts_url
+    render :json => { success: true, current_customer: current_customer }
   end
 
   private

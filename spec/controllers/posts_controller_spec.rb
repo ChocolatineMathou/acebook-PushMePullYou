@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe PostsController, type: :controller do
 
   before do
-    # @request.env["devise.mapping"] = Devise.mappings[:posts]
     @customer = Customer.create({ first_name: "test", last_name: "rspec", email: "testing@rspec.com", password: "123456", password_confirmation: "123456" })
     @customer_id = Customer.find_by(email: "testing@rspec.com").id
   end
@@ -11,7 +10,6 @@ RSpec.describe PostsController, type: :controller do
   # posts POST request
   # URI pattern /posts/
   # posts#create
-
   describe "POST /" do
     it "returns json data" do
       post :create, params: { post: { message: "this is a test", customer_id: @customer_id } }
@@ -34,7 +32,6 @@ RSpec.describe PostsController, type: :controller do
   # posts GET request
   # URI pattern /posts/
   # posts#index
-
   describe "GET /" do
 
     before do
@@ -52,8 +49,7 @@ RSpec.describe PostsController, type: :controller do
 
     it "posts in chronological order" do
       get :index
-      expect(JSON.parse(response.body)).to eq ({
-      "posts" => [
+      expect(JSON.parse(response.body)["posts"]).to eq ([
         { "id" => @post_2.id,
         "message" => @post_2.message,
         "created_at" => @post_2.created_at.as_json,
@@ -68,7 +64,7 @@ RSpec.describe PostsController, type: :controller do
         "customer_id" => @post_1.customer_id,
         "first_name" => @customer.first_name,
         "last_name" => @customer.last_name }
-        ]})
+        ])
     end
 
   end
@@ -76,25 +72,28 @@ RSpec.describe PostsController, type: :controller do
   # post DELETE request
   # URI pattern /posts/:id
   # posts#destroy
-
   describe "DELETE /" do
 
-    it "passes destroy method to Post" do
-      expect(Post).to receive(:destroy).with("1")
-      delete :destroy, params: { id: 1 }
+    before do
+      post :create, params: { post: { message: "this is a test", customer_id: @customer_id } }
+      @post = Post.find_by(message: "this is a test")
     end
 
-    it "responds with 302" do
-      allow(Post).to receive(:destroy)
-      delete :destroy, params: { id: 1 }
-      expect(response).to have_http_status(302)
+    it "returns json data" do
+      delete :destroy, params: { id: @post.id }
+      expect(response).to be_successful
+      expect(response.content_type).to eq('application/json')
     end
 
-    it "redirects to posts_url" do
-      allow(Post).to receive(:destroy)
-      delete :destroy, params: { id: 1}
-      expect(response).to redirect_to(posts_url)
+    it "removes post from table" do
+      expect { delete :destroy, params: { id: @post.id } }.to change { Post.all.length }.by(-1)
     end
+
+    it "returns a success message" do
+      delete :destroy, params: { id: @post.id }
+      expect(JSON.parse(response.body)["success"]).to eq true
+    end
+
   end
 
 end
