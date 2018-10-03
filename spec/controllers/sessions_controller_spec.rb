@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
-
   # devise/sessions#create
   describe "POST /" do
 
@@ -58,4 +57,30 @@ RSpec.describe SessionsController, type: :controller do
 
   end
 
+  # sessions#destroy
+  # DELETE
+  # customers/sign_out
+  describe "DELETE /" do
+
+    context "given a user is already signed in" do
+
+      before do
+        @request.env["devise.mapping"] = Devise.mappings[:customer]
+        @customer = Customer.create({ first_name: "test", last_name: "rspec", email: "testing@rspec.com", password: "123456", password_confirmation: "123456" })
+        sign_in @customer
+      end
+
+      it "sets the current_user to nil" do
+        delete :destroy
+        expect(subject.current_customer).to eq nil
+        expect(JSON.parse(response.body)["current_customer"]).to eq nil
+      end
+
+      it "returns a success message" do
+        delete :destroy
+        expect(JSON.parse(response.body)["success"]).to eq true
+      end
+
+    end
+  end
 end
