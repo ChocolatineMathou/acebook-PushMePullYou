@@ -1,5 +1,8 @@
 class SessionsController < Devise::SessionsController
 
+  # overrides devises methods for checking if user is already signed out (prevents flash messages)
+  skip_before_action :verify_signed_out_user
+
   def create
     customer = Customer.find_by(email: params[:email])
 
@@ -8,11 +11,16 @@ class SessionsController < Devise::SessionsController
         sign_in customer
         render :json => { :success=>true, current_customer: current_customer }
       else
-        render :json => { :success=>false, message: "Invalid email or password"}
+        render :json => { :success=>false, current_customer: nil, message: "Invalid email or password"}
       end
     else
-      render :json => { :success=>false, message: "Account doesn't exist"}
+      render :json => { :success=>false, current_customer: nil, message: "Account doesn't exist"}
     end
+  end
+
+  def destroy
+    sign_out current_customer
+    render :json => { :success=>true, current_customer: nil }
   end
 
 end
