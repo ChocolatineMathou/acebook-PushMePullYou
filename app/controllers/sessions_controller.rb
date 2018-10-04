@@ -19,7 +19,6 @@ class SessionsController < Devise::SessionsController
   end
 
   def destroy
-    p "def destroy"
     sign_out current_customer
     render :json => { :success=>true, current_customer: nil }
   end
