@@ -26,7 +26,6 @@ RSpec.describe PostsController, type: :controller do
       expect(JSON.parse(response.body)["success"]).to eq true
       expect(JSON.parse(response.body)["post"]["message"]).to eq "this is a test"
     end
-
   end
 
   # posts GET request
