@@ -12,24 +12,20 @@ class PostsContainer extends Component {
 
 
   componentDidMount() {
-    fetch('/posts')
+    fetch('http://localhost:3001/posts')
     .then(response => response.json())
     .then(data => this.setState({ posts: data.posts }));
   }
-
-
-
-
-
   render() {
+    const { posts } = this.state;
     return (
       <div className="Posts-container">
-        <p class="it_block">it <mark class="green">"allows user to see all posts"</mark> <mark class="purple">do</mark></p>
+        <p className="it_block">it <mark className="green">"allows user to see all posts"</mark> <mark className="purple">do</mark></p>
 
-        {this.state.posts.map( post => {
+        {posts.map( post => {
           return (<Post post={post} key={post.id} />)
         })}
-        
+
       </div>
     )
   }
