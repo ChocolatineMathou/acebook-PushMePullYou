@@ -9,8 +9,11 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           Acebook PushMePullYou Posts
+
         </header>
+        <h1><mark class="yellow">PushMePullYou</mark>.acebook <mark class="purple">do</mark></h1>
         <PostsContainer />
+        <h1 class="end"><mark class="purple">end</mark></h1>
       </div>
     );
   }

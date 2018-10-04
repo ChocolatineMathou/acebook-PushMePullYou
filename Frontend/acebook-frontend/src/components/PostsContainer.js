@@ -24,10 +24,12 @@ class PostsContainer extends Component {
   render() {
     return (
       <div className="Posts-container">
+        <p class="it_block">it <mark class="green">"allows user to see all posts"</mark> <mark class="purple">do</mark></p>
+
         {this.state.posts.map( post => {
           return (<Post post={post} key={post.id} />)
         })}
-
+        
       </div>
     )
   }
