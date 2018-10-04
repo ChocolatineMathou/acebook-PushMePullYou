@@ -5,4 +5,5 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :posts
   has_many :likes
+  validates_uniqueness_of :email
 end
