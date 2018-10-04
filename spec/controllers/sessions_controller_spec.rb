@@ -31,15 +31,14 @@ RSpec.describe SessionsController, type: :controller do
         expect(subject.current_customer.id).to eq @customer_id
       end
 
-      it "provides the current_customer id in the json" do
+      it "provides the current_customer in the json" do
         post :create, params: sign_up_params
-        expect(session["warden.user.customer.key"][0][0]).to eq @customer_id
-        expect(JSON.parse(response.body)["current_customer"]["id"]).to eq @customer_id
+        expect(JSON.parse(response.body)["current_customer"]["first_name"]).to eq "test"
       end
 
       it "provides a session key in the json" do
         post :create, params: sign_up_params
-        expect(JSON.parse(response.body)["current_customer"]["session_key"]).to eq session["warden.user.customer.key"][1]
+        expect(JSON.parse(response.body)["session"]).to eq session["warden.user.customer.key"]
       end
     end
 

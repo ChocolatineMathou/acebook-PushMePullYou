@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
 
     if customer.valid?
       sign_in customer
-      render :json => {:success=>true, current_customer: current_customer }
+      render :json => {:success=>true, current_customer: current_customer, session: session["warden.user.customer.key"] }
     else
       render :json => {:success=>false, message: "Oooops"}
     end
