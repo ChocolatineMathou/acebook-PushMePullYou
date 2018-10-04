@@ -9,7 +9,7 @@ class SessionsController < Devise::SessionsController
     if !!customer
       if customer.valid_password?(params[:password])
         sign_in customer
-        render :json => { :success=>true, current_customer: current_customer }
+        render :json => { :success=>true, current_customer: { id: current_customer.id, session_key: session["warden.user.customer.key"][1] } }
       else
         render :json => { :success=>false, current_customer: nil, message: "Invalid email or password"}
       end
