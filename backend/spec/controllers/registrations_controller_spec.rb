@@ -1,12 +1,23 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe RegistrationsController, type: :controller do
-
-  let(:valid_params) { { first_name: "test", last_name: "rspec", email: "testing@rspec.com", password: "123456", password_confirmation: "123456"} }
-  let(:invalid_params) {{ first_name: "test", last_name: "rspec", password: "123456", password_confirmation: "123456"}}
+  let(:valid_params) do
+    { first_name: "test",
+      last_name: "rspec",
+      email: "testing@rspec.com",
+      password: "123456",
+      password_confirmation: "123456" }
+  end
+  let(:invalid_params) do
+    { first_name: "test",
+      last_name: "rspec",
+      password: "123456",
+      password_confirmation: "123456" }
+  end
 
   describe "POST /" do
-
     before do
       @request.env["devise.mapping"] = Devise.mappings[:customer]
     end
@@ -15,7 +26,7 @@ RSpec.describe RegistrationsController, type: :controller do
       it "returns json data" do
         post :create, params: valid_params
         expect(response).to be_successful
-        expect(response.content_type).to eq('application/json')
+        expect(response.content_type).to eq("application/json")
       end
 
       it "adds a customer to the table" do
@@ -43,7 +54,7 @@ RSpec.describe RegistrationsController, type: :controller do
       it "does not create a new customer" do
         post :create, params: invalid_params
         expect(response).to be_successful
-        expect(response.content_type).to eq('application/json')
+        expect(response.content_type).to eq("application/json")
       end
 
       it "doesn't add customer to the table" do
@@ -56,7 +67,7 @@ RSpec.describe RegistrationsController, type: :controller do
         expect(JSON.parse(response.body)["message"]).to eq "Oooops"
       end
 
-      it "doesn't assign customer to current_customer" do
+      it "does not assign customer to current_customer" do
         post :create, params: invalid_params
         expect(subject.current_customer).to eq nil
       end
