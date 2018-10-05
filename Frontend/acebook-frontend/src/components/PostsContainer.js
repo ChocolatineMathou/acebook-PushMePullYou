@@ -10,7 +10,6 @@ class PostsContainer extends Component {
     }
   }
 
-
   componentDidMount() {
     fetch('http://localhost:3001/posts')
     .then(response => response.json())
@@ -21,7 +20,6 @@ class PostsContainer extends Component {
     return (
       <div className="Posts-container">
         <p className="it_block">it <mark className="green">"allows user to see all posts"</mark> <mark className="purple">do</mark></p>
-
         {posts.map( post => {
           return (<Post post={post} key={post.id} />)
         })}

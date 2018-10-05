@@ -15,15 +15,29 @@ class PostForm extends Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
-  }
+    fetch('http://localhost:3001/posts', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        post: {
+          message: this.state.value,
+          customer_id: 2
+        }
+      }),
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+}
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Name:
+          Message:
           <input type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Submit" />
